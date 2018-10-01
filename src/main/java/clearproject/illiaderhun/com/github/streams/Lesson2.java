@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -59,6 +60,7 @@ public class Lesson2 {
       List<String> newList = list.stream()
               .map(String::toLowerCase)
               .collect(Collectors.toList());
+
       newList.forEach(System.out::println);
   }
 
@@ -77,6 +79,7 @@ public class Lesson2 {
               .filter(s -> s.length() % 2 != 0)
               .map(String::toLowerCase)
               .collect(Collectors.toList());
+
       newList.forEach(System.out::println);
   }
 
@@ -95,6 +98,7 @@ public class Lesson2 {
               .skip(1)
               .limit(3)
               .collect(Collectors.joining("-"));
+
       System.out.println(mergeLine);
   }
 
@@ -162,6 +166,7 @@ public class Lesson2 {
                 .map(String::toLowerCase)
                 .distinct()
                 .sorted((a, b) -> a.length() - b.length())
+                //.sorted(Comparator.comparingInt(String::length))
                 .collect(Collectors.toList());
 
         uniqueWords.stream().forEach(System.out::println);
