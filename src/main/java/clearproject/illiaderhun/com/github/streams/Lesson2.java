@@ -57,11 +57,11 @@ public class Lesson2 {
         "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
 
     /* YOUR CODE HERE */
-      List<String> newList = list.stream()
+      List<String> theList = list.stream()
               .map(String::toLowerCase)
               .collect(Collectors.toList());
 
-      newList.forEach(System.out::println);
+      theList.stream().forEach(System.out::println);
   }
 
   /**
@@ -75,12 +75,12 @@ public class Lesson2 {
         "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
 
     /* YOUR CODE HERE */
-      List<String> newList = list.stream()
-              .filter(s -> s.length() % 2 != 0)
+      List<String> theList = list.stream()
+              .filter(s -> (s.length() & 1) == 1)
               .map(String::toLowerCase)
               .collect(Collectors.toList());
 
-      newList.forEach(System.out::println);
+      theList.stream().forEach(System.out::println);
   }
 
   /**
@@ -94,12 +94,12 @@ public class Lesson2 {
         "The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog");
 
     /* YOUR CODE HERE */
-      String mergeLine = list.stream()
+      String theResult = list.stream()
               .skip(1)
               .limit(3)
               .collect(Collectors.joining("-"));
 
-      System.out.println(mergeLine);
+      System.out.println(theResult);
   }
 
   /**
@@ -109,8 +109,8 @@ public class Lesson2 {
     try (BufferedReader reader = Files.newBufferedReader(
         Paths.get("src\\main\\resources\\SonnetI.txt"), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
-        long lines = reader.lines().count();
-        System.out.println(lines);
+        long theSize = reader.lines().count();
+        System.out.println(theSize);
     }
   }
   
@@ -124,13 +124,12 @@ public class Lesson2 {
     try (BufferedReader reader = Files.newBufferedReader(
         Paths.get("src\\main\\resources\\SonnetI.txt"), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
-        List<String> uniqueWords = reader.lines()
-                .flatMap(line -> Stream.of(line.split(WORD_REGEXP)))
+        List<String> list = reader.lines()
+                .flatMap(s -> Stream.of(s.split(WORD_REGEXP)))
                 .distinct()
                 .collect(Collectors.toList());
 
-        uniqueWords.stream()
-                .forEach(System.out::println);
+        list.stream().forEach(System.out::println);
     }
   }
   
@@ -143,14 +142,14 @@ public class Lesson2 {
     try (BufferedReader reader = Files.newBufferedReader(
         Paths.get("src\\main\\resources\\SonnetI.txt"), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
-        List<String> uniqueWords = reader.lines()
-                .flatMap(line -> Stream.of(line.split(WORD_REGEXP)))
+        List<String> list = reader.lines()
+                .flatMap(s -> Stream.of(s.split(WORD_REGEXP)))
                 .map(String::toLowerCase)
                 .distinct()
                 .sorted()
                 .collect(Collectors.toList());
 
-        uniqueWords.stream().forEach(System.out::println);
+        list.stream().forEach(System.out::println);
     }
   }
   
@@ -161,15 +160,15 @@ public class Lesson2 {
     try (BufferedReader reader = Files.newBufferedReader(
         Paths.get("src\\main\\resources\\SonnetI.txt"), StandardCharsets.UTF_8)) {
       /* YOUR CODE HERE */
-        List<String> uniqueWords = reader.lines()
-                .flatMap(line -> Stream.of(line.split(WORD_REGEXP)))
+        List<String> list = reader.lines()
+                .flatMap(s -> Stream.of(s.split(WORD_REGEXP)))
                 .map(String::toLowerCase)
                 .distinct()
                 .sorted((a, b) -> a.length() - b.length())
-                //.sorted(Comparator.comparingInt(String::length))
                 .collect(Collectors.toList());
+        //.sorted(Comparator.comparingInt(String::length))
 
-        uniqueWords.stream().forEach(System.out::println);
+        list.stream().forEach(System.out::println);
     }
   }
 
